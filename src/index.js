@@ -39,7 +39,7 @@ span.heimu a.external, span.heimu a.external:visited, span.heimu a.extiw, span.h
 
 
 async function makeScreenshot(page, el) {
-  await page.waitForNetworkIdle()
+  // await page.waitForNetworkIdle()
   await page.evaluate(() => {
     window.scroll(0, 0)
   })
@@ -60,7 +60,7 @@ async function makeScreenshot(page, el) {
     await page.evaluate((xpos, ypos) => {
       window.scroll(xpos, ypos)
     }, contentSize.x, ypos)
-    await page.waitForNetworkIdle()
+    // await page.waitForNetworkIdle()
     console.log(contentSize.x, ypos, contentSize.width, content_height)
     let r = await page.screenshot({
       type: 'jpeg', quality: 90, encoding: 'base64', clip: {
