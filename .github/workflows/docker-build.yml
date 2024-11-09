@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Login to Aliyun Container Registry
+      uses: aliyun/acr-login@v1
+      with:
+        login-server: registry.cn-hangzhou.aliyuncs.com
+        region-id: cn-hangzhou
+        username: "${{ secrets.REGISTRY_USERNAME }}"
+        password: "${{ secrets.REGISTRY_PASSWORD }}"
+    - name: Build and push image
+      env:
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:$IMAGE_TAG .
+        docker build -t registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:latest .
+        docker push registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:$IMAGE_TAG
+        docker push registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:latest
