@@ -26,6 +26,7 @@ jobs:
       env:
         IMAGE_TAG: ${{ github.sha }}
       run: |
+        echo $PWD
         docker build -t registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:$IMAGE_TAG .
         docker build -t registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:latest .
         docker push registry.cn-hangzhou.aliyuncs.com/worldhim/oa-web-render:$IMAGE_TAG
