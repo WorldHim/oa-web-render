@@ -5,4 +5,4 @@ WORKDIR /oa-web-render
 COPY . .
 EXPOSE 15551
 
-RUN npm install -g
+RUN npm install
