@@ -3,7 +3,6 @@ USER pptruser
 ENTRYPOINT [ "node" ]
 CMD [ "./src/index.js" ]
 WORKDIR /oa-web-render
-COPY .
 EXPOSE 15551
 
 RUN npm install
